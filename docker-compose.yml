@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  airflow-webserver:
+    build: ./airflow
+    command: webserver
+    entrypoint: [ "/usr/bin/dumb-init", "--", "/entrypoint" ]
+    restart: always
+    ports:
+      - "8080:8080"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://stock_admin:stocks@host.docker.internal:5432/stock
+      - AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION=true
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - _AIRFLOW_WWW_USER_USERNAME=admin
+      - _AIRFLOW_WWW_USER_PASSWORD=admin
+      - AIRFLOW__WEBSERVER__SECRET_KEY=fixed_secret_key_12345
+      - AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True
+      - AIRFLOW__WEBSERVER__BASE_URL=http://localhost:8080
+    volumes:
+      - .:/opt/airflow/project
+      - ./stock_prediction_dag.py:/opt/airflow/dags/stock_prediction_dag.py
+
+  airflow-scheduler:
+    build: ./airflow
+    command: scheduler
+    entrypoint: [ "/usr/bin/dumb-init", "--", "/entrypoint" ]
+    restart: always
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://stock_admin:stocks@host.docker.internal:5432/stock
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__WEBSERVER__SECRET_KEY=fixed_secret_key_12345
+      - AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True
+      - AIRFLOW__WEBSERVER__BASE_URL=http://localhost:8080
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    runtime: nvidia
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/opt/airflow/project
+      - ./stock_prediction_dag.py:/opt/airflow/dags/stock_prediction_dag.py

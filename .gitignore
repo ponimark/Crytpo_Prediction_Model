@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual env
+.venv/
+env/
+venv/
+
+# Data
+*.csv
+*.json
+*.db
+
+# Model artifacts
+models/
+models_incremental/
+models_versions/
+scalers/
+
+# Cache
+*.log
+*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,28 @@
+# Data Collection
+yfinance
+ccxt
+alpaca-trade-api
+requests
+
+# Data Processing
+pandas
+numpy<2.0.0
+scikit-learn
+
+# Modeling (Modern TF with Legacy Support)
+tensorflow
+matplotlib
+seaborn
+
+# API & Dashboard
+fastapi
+uvicorn
+streamlit
+schedule
+python-dotenv
+
+python-binance
+alpaca-trade-api
+pandas
+SQLAlchemy
+psycopg2-binary
