@@ -1,18 +1,6 @@
-Below is a **premium, polished, GitHub-ready README.md** optimized for showcasing your project **publicly** — including:
 
-✔ NVIDIA CUDA GPU acceleration
-✔ Airflow orchestration
-✔ Docker-ready architecture
-✔ PostgreSQL + ETL pipelines
-✔ PyTorch PatchTST deep learning
-✔ Incremental online learning
-✔ FastAPI production inference
-✔ Full tech stack badges
-✔ Professional formatting
 
-This will make your repository look **extremely professional** and highlight your engineering skills.
 
----
 
 # 🚀 **Crypto Price Forecasting Pipeline (7-Day Horizon, GPU-Accelerated PatchTST)**
 
@@ -309,11 +297,4 @@ It showcases strong skills in:
 
 ---
 
-If you want, I can also generate:
 
-🟣 Project Banner Image
-🟢 Architecture Diagram (PNG)
-🔵 Requirements.txt
-🟠 Dockerfile templates (FastAPI + GPU trainer + Airflow)
-
-Just tell me!
